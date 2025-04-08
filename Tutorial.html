@@ -1,14 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Diamond</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0D0D0D; /* Negro */
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        /* Banner principal con imagen */
+        header {
+            background: url('banner.jpg') no-repeat center center/cover;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 10px black;
+        }
+
+        /* Contenedor de secciones */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .box, .dropdown button {
+            background-color: #FFD700; /* Dorado */
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .box:hover, .dropdown button:hover {
+            transform: scale(1.1);
+            background-color: #FFC300; /* Amarillo más oscuro */
+        }
+
+        .box a {
+            text-decoration: none;
+            color: #0D0D0D; /* Negro */
+        }
+
+        /* Menú desplegable */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #4B0082;
+            min-width: 160px;
+            z-index: 1;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        /* Animación de apertura */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* Reproductor de podcast */
+        .podcast {
+            background-color: #4B0082; /* Morado oscuro */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Botón de play con efecto */
+        .play-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.3s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.2);
+            color: #FFD700;
+        }
+
+        /* Redes sociales */
+        .media {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .social-icons img {
+            width: 30px;
+            margin: 5px;
+            filter: brightness(1.5);
+            transition: transform 0.3s;
+        }
+
+        .social-icons img:hover {
+            transform: scale(1.2);
+        }
+
+        footer {
+            background-color: #4B0082;
+            padding: 10px;
+            border-top: 3px solid #FFD700;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Titulo 1</h1>
+
+    <header>
+        <h1>Star Diamond</h1>
+    </header>
+
+    <main>
+        <section class="grid-container">
+            <div class="box"><a href="#">Revista Star Diamond</a></div>
+            <div class="box"><a href="#">Artistas</a></div>
+            <div class="dropdown">
+                <button id="convocatorias-btn">Convocatorias ▼</button>
+                <div class="dropdown-content" id="dropdown-menu">
+                    <a href="#">Convocatoria 1</a>
+                    <a href="#">Convocatoria 2</a>
+                    <a href="#">Convocatoria 3</a>
+                </div>
+            </div>
+            <div class="box"><a href="#">Eventos</a></div>
+        </section>
+
+        <section class="podcast">
+            <button class="play-btn">▶</button>
+            <h2>Podcast</h2>
+            <audio controls>
+                <source src="podcast.mp3" type="audio/mpeg">
+                Tu navegador no soporta el reproductor de audio.
+            </audio>
+        </section>
+
+        <section class="media">
+            <div class="box"><a href="#">Playlist Recomendaciones</a></div>
+            <div class="box"><a href="#">Videos</a></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><img src="linkedin.png" alt="LinkedIn"></a>
+            <a href="#"><img src="instagram.png" alt="Instagram"></a>
+            <a href="#"><img src="chat.png" alt="Chat"></a>
+            <a href="#"><img src="spotify.png" alt="Spotify"></a>
+        </div>
+    </footer>
+
+    <script>
+        // Función para mostrar/ocultar el menú de convocatorias
+        document.getElementById("convocatorias-btn").addEventListener("click", function() {
+            let menu = document.getElementById("dropdown-menu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        });
+
+        // Botón de Play para el Podcast
+        const playBtn = document.querySelector('.play-btn');
+        const audio = document.querySelector('audio');
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = "⏸";
+            } else {
+                audio.pause();
+                playBtn.textContent = "▶";
+            }
+        });
+    </script>
+
 </body>
 </html>
